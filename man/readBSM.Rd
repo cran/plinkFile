@@ -7,36 +7,35 @@
 readBSM(pfx, dgv = 1, fid = NULL, id = NULL, bin = NULL)
 }
 \arguments{
-\item{pfx}{prefix of data files {pfx}.id and {pfx}.bin}
+\item{pfx}{prefix of data files \code{pfx.id} and \code{pfx.bin}}
 
 \item{dgv}{diagonal value for matrix without a diagonal (def=1.0)}
 
 \item{fid}{separator between FID and IID (def=NULL, use IID only)}
 
-\item{id}{use id file instead of the default \code{{pfx}.id}}
+\item{id}{use id file instead of the default \code{pfx.id}}
 
-\item{bin}{use bin file instead of the default \code{{pfx}.bin}}
+\item{bin}{use bin file instead of the default \code{pfx.bin}}
 }
 \value{
-symmetric matrix  loaded from file,  with sample ID  in the  row and
-    column names.
+symmetric matrix loaded, with sample ID as both row and column names.
 }
 \description{
-Read BSM represented by a pair of files suffixed by ".bin" and ".id",
-usually produced by PLINK and GCTA.
+Read BSM represented by a pair of files suffixed by ".bin" and ".id", usually
+produced by PLINK and GCTA.
 }
 \details{
 The ".bin" is a binary file storing the matrix entries, which can be
 
-\itemize{
-  \item{the N x N symmetric matrix in full}
-  \item{the lower triangle with diagonal}
-  \item{the lower triangle w/o diagonal}
+\describe{
+\item{SQR}{the \code{N} x \code{N} symmetric matrix in full}
+\item{LWD}{the lower triangle with diagonal}
+\item{LND}{the lower triangle without diagonal}
 },
 saved as either single or double precision.
 
-The ".id"  a text  file of  family ID (FID)  and individual  ID (IID)  in two
-columns. by default, IID is used as matix row and column names.
+The ".id" is  a text file of \code{N}  family ID (FID) and individual  ID (IID) in
+two columns. By default, IID is used as matix row and column names.
 
 PLINK option  \code{--make-red bin},  \code{--distance bin}, and  GCTA option
 \code{--make-grm} all creats binary symmetric matrices, widely used in linear

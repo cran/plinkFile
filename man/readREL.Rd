@@ -16,9 +16,9 @@ relatedness matrix with row and column names set to sample ID.
 }
 \description{
 A PLINK REL (Relatedness) matrix is represented by
-\itemize{
-  \item {.rel.bin:}{REL matrix in binary}
-  \item {.rel.id :}{FID and IID in text}
+\describe{
+\item{.rel.bin:}{REL matrix in binary}
+\item{.rel.id :}{FID and IID in text}
 }
 A binary REL matrix is the result of PLINK \code{--make-rel bin}
 }

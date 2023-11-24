@@ -4,14 +4,34 @@
 \alias{readBIM}
 \title{Read BIM file}
 \usage{
-readBIM(pfx)
+readBIM(bim, vfr = NULL, vto = NULL)
 }
 \arguments{
-\item{pfx}{prefix of a PLINK file set.}
+\item{bim}{prefix or name of a PLINK file.}
+
+\item{vfr}{variant-wise, from where to read? (index/proportion, def=1).}
+
+\item{vto}{varinat-wise, to where then stop? (index/proportion, def=P).}
 }
 \value{
-data frame describing genome variants, loaded from the BIM file.
+data frame of variants, loaded from BIM.
 }
 \description{
-Read BIM file
+Get variant meta-data form the \emph{bim} file of a PLINK1 BED fileset.
+}
+\details{
+There are six columns in a \emph{bim} file
+\itemize{
+\item chr: chromosme of the variant
+\item vid: variant id, such as an RS number;
+\item cmg: position by centimorgan;
+\item bps: position by basepairs;
+\item al1: allele 1, the one counted as dosage.
+\item al2: allele 2.
+}
+}
+\examples{
+bed <- file.path(system.file("extdata", package="plinkFile"), "000.bed")
+bim <- readBIM(bed, 20, 30)
+bim
 }

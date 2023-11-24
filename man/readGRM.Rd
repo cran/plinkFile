@@ -4,7 +4,7 @@
 \alias{readGRM}
 \title{Read Genetic Related Matrix (GRM) of GCTA}
 \usage{
-readGRM(pfx, fid = ".")
+readGRM(pfx, fid = NULL)
 }
 \arguments{
 \item{pfx}{prefix of GRM file set}
@@ -22,10 +22,10 @@ matrix.
 \details{
 GCTA GRM is represented by a set of three files:
 
-\itemize{
-  \item {.grm.bin   :}{GRM matrix in binary}
-  \item {.grm.id    :}{sample FID and IID in text}
-  \item {.grm.N.bin :}{number of valid variants for each GRM entry}}
+\describe{
+\item{.grm.bin   :}{GRM matrix in binary}
+\item{.grm.id    :}{sample FID and IID in text}
+\item{.grm.N.bin :}{number of valid variants for each GRM entry}}
 
 and it always  uses single precision (4  bytes per entry).
 

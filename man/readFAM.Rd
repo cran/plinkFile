@@ -4,20 +4,36 @@
 \alias{readFAM}
 \title{Read FAM file}
 \usage{
-readFAM(pfx)
+readFAM(fam)
 }
 \arguments{
-\item{pfx}{prefix of a PLINK file set.}
+\item{fam}{prefix or name of a PLINK file.}
 }
 \value{
-data frame describing individuals,  loaded from the FAM file.
+data frame of individuals, loaded from FAM.
 }
 \description{
-Read FAM file
+Read sample meta-data form the \emph{fam} file of a PLINK1 BED fileset.
+}
+\details{
+There are six columns in a \emph{bim} file
+\itemize{
+\item fid: family ID;
+\item iid: individual ID, default row name used by \verb{[readBED]};
+\item mom: maternal ID;
+\item dad: paternal ID;
+\item sex: individual sex.
+\item phe: phenotype, not often used;
+}
+
+The PLINK1 \emph{bim} file has no header line, this is changed in PLINK2.
+
+The columns "sex" and "phe" are  mostly the legency of early GWAS, nowerdays
+it is common to provide sex, among other covariates, and multiple phenotypes
+in a separate file.
 }
 \examples{
 pfx <- file.path(system.file("extdata", package="plinkFile"), "m20")
-bed <- readBED(pfx, row=1, col=1, quiet=FALSE)
-bed
-
+fam <- readFAM(pfx)
+fam
 }

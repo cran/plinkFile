@@ -4,7 +4,7 @@
 \alias{saveGRM}
 \title{Save symmetic matrix to GCTA GRM format.}
 \usage{
-saveGRM(pfx, grm, vcm = NULL, fid = ".")
+saveGRM(pfx, grm, vcm = NULL, fid = NULL)
 }
 \arguments{
 \item{pfx}{prefix of data files}
@@ -13,7 +13,7 @@ saveGRM(pfx, grm, vcm = NULL, fid = ".")
 
 \item{vcm}{variant counts matrix to save (def=1).}
 
-\item{fid}{separator after family ID. (def=".")}
+\item{fid}{separator after family ID. (def=NULL)}
 }
 \description{
 GRM (Genetic  Relatedness Matrix) is  the core  formt of GCTA,  this function
@@ -22,10 +22,10 @@ saves a R symmetric matrix to a file set recgnizable by GCTA.
 \details{
 Three files will be saved:
 
-\itemize{
-  \item {.grm.bin   :}{genetic relatedness matrix in binary}
-  \item {.grm.id    :}{FID and IID for N individuals in text}
-  \item {.grm.N.bin :}{variant count matrix (VCM) in binary}
+\describe{
+\item{.grm.bin   :}{genetic relatedness matrix in binary}
+\item{.grm.id    :}{FID and IID for N individuals in text}
+\item{.grm.N.bin :}{variant count matrix (VCM) in binary}
 }
 
 FID and IID will be generated if the \code{grm} to be saved has no row names.

@@ -16,9 +16,9 @@ IBS matrix with row and column names set to sample ID.
 }
 \description{
 A PLINK IBS (Identity by State) matrix is represented by
-\itemize{
-  \item {.mibs.bin:}{IBS matrix in binary}
-  \item {.mibs.id :}{FID and IID in text}
+\describe{
+\item{.mibs.bin:}{IBS matrix in binary}
+\item{.mibs.id :}{FID and IID in text}
 }
 A binary IBS matrix is the result of PLINK \code{--distance ibs bin}
 }

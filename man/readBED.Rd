@@ -4,47 +4,56 @@
 \alias{readBED}
 \title{Read BED file}
 \usage{
-readBED(pfx, row = NULL, col = NULL, quiet = TRUE)
+readBED(pfx, iid = 1, vid = 1, vfr = NULL, vto = NULL, quiet = TRUE)
 }
 \arguments{
 \item{pfx}{prefix of PLINK file set, or the fullname of a BED file.}
 
-\item{row}{the row names: 1 =  use individual ID, 2 =  family and individual
-ID, def = NULL.}
+\item{iid}{option to read \code{N} IID as row names. (def=1, see \code{\link[=readIID]{readIID()}})}
 
-\item{col}{the column names: 1 =  use variant ID (i.e., rsID), 2 = CHR:POS, 3
-= CHR:POS_A1_A2}
+\item{vid}{option to read \code{P} VID as col names. (def=1, see \code{\link[=readVID]{readVID()}})}
+
+\item{vfr}{variant-wise, from where to read? (number/proportion, def=1)}
+
+\item{vto}{varinat-wise, to where then stop? (number/proportion, def=P)}
 
 \item{quiet}{suppress screen printing? (def=TRUE)}
 }
 \value{
-genotype matrix with row individuals and column variants.
+genotype matrix with \code{N} row individuals and \code{P} column variants.
 }
 \description{
-Read a BED file into a R matrix. This is meant for in-of-memory process of moderate
-to small sized genotype.
+Read a PLINK BED file into a R matrix.
 }
 \details{
-To scan a huge BED one varant at time without reading it into the memoty, see
-\code{\link{scanBED}} instead.
+This is  meant for genotype that  can fit into  system memory; the size  of R
+matrix is 16 times  the BED file.  To traverse a huge  BED several varants at
+time  without  loading it  entirely  into  the  memoty, see  \code{\link[=scanBED]{scanBED()}}  and
+\code{\link[=loopBED]{loopBED()}}.
 
-A BED (\emph{binary biallelic genotype table}) is comprised of three files
-(usually) sharing identical prefix:
-\itemize{
-  \item {pfx}.fam: table of N typed individuals
-  \item {pfx}.bim: table of P typed genomic variants (i.e., SNPs);
-  \item {pfx}.bed: genotype matrix of N rows and P columns stored in condensed
-  binary format.
+A PLINK1 binary fileset has three files,
+\describe{
+\item{\code{pfx.fam}:}{text table of \code{N} individuals.}
+\item{\code{pfx.bim}:}{text table of \code{P} genomic variants (i.e., SNPs).}
+\item{\code{pfx.bed}:}{\code{N} x \code{P} genotype matrix in condensed binary format.}
 }
 
-The three files are commonly referred by their common prefix, e.g.:
-
-chrX.bed, chrX.fam, and chrX.bim, are jointly specified by "chrX".
+The three  files comprising a genotype  data are typically referred  by their
+common  prefix,  for  example,  the  X  chromosome  genotype  represented  by
+\code{chrX.bed}, \code{chrX.fam}, and \code{chrX.bim} are jointly refered by \code{chrX}.
 }
 \examples{
+## read an entire small data
 bed <- system.file("extdata", 'm20.bed', package="plinkFile")
-pfx <- sub("[.]bed$", "", bed)
-bed <- readBED(pfx, quiet=FALSE)
+gmx <- readBED(bed, quiet=FALSE)
+
+## read part of a large data
+bed <- system.file("extdata", '000.bed', package="plinkFile")
+U <- readBED(bed, vfr=01, vto=10, quiet=FALSE)
+V <- readBED(bed, vfr=11, vto=20, quiet=FALSE)
+W <- cbind(U, V)
+X <- readBED(bed, vfr=01, vto=20, quiet=FALSE)
+all.equal(W, X)
 
 }
 \seealso{
